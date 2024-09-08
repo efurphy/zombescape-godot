@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://booqo47xqark2"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_qrgsl"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_qrgsl")
+
+[node name="SpawnZombieTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnZombieTimer" to="." method="spawn_zombie"]
