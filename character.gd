@@ -4,7 +4,6 @@ class_name Character extends Node2D
 var radius: float
 var color: Color
 var update: Callable = func(): pass
-var test = false
 
 
 func _init(

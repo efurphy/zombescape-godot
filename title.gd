@@ -14,6 +14,14 @@ func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	# load save
+	var save_file = FileAccess.open("user://.save", FileAccess.READ)
+	var save_data = save_file.get_as_text().split("\n")
+	for i in range(Global.hiscores.size()):
+		var score = int(save_data[i])
+		Global.hiscores[i] = score
+	#
+	
 	Global.score = 0
 	
 	$EasyButton.size.x = button_width

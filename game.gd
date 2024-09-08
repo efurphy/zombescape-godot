@@ -1,4 +1,4 @@
-class_name Game extends Node2D
+class_name Game extends Node
 
 
 const character_radius: float = 16
@@ -11,6 +11,11 @@ var zombies: Array[Character]
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	
+	Global.new_hiscore = false
+	
+	$ScoreLabel.position.y = 8
+	update_score_label()
 	
 	$SpawnZombieTimer.wait_time = Global.spawn_times[Global.difficulty]
 	
@@ -30,27 +35,6 @@ func _ready() -> void:
 	add_child(player)
 
 
-func _process(delta: float) -> void:
-	queue_redraw()
-
-
-func _draw() -> void:
-	draw_string(
-		Global.font,
-		Vector2(
-			get_window().size.x/2,
-			Global.font.get_string_size(
-				str(Global.score)
-			).y + 2
-		),
-		str(Global.score),
-		HORIZONTAL_ALIGNMENT_CENTER,
-		-1,
-		32,
-		Color.WHITE
-	)
-
-
 func spawn_zombie() -> void:
 	var randy = randi_range(0, 3)
 	
@@ -66,9 +50,11 @@ func spawn_zombie() -> void:
 		spawn_location.x = get_window().size.x + character_radius
 	
 	if randy == 0 or randy == 2:
-		spawn_location.x = randi_range(0, get_window().size.x + character_radius)
+		spawn_location.x = randi_range(0,
+			get_window().size.x + character_radius)
 	elif randy == 1 or randy == 3:
-		spawn_location.y = randi_range(0, get_window().size.y + character_radius)
+		spawn_location.y = randi_range(0,
+			get_window().size.y + character_radius)
 	
 	var zombie = Character.new(
 		spawn_location,
@@ -81,9 +67,8 @@ func spawn_zombie() -> void:
 		
 		zombie.position += dir * delta * 240
 		
-		var pos = zombie.get("position")
-		
-		if zombie.position.distance_to(player.position) < zombie.radius + player.radius:
+		if zombie.position.distance_to(player.position) \
+			< zombie.radius + player.radius:
 			game_over()
 	
 	zombies.push_back(zombie)
@@ -96,8 +81,25 @@ func spawn_zombie() -> void:
 
 
 func game_over():
+	if Global.score > Global.hiscores[Global.difficulty]:
+		Global.hiscores[Global.difficulty] = Global.score
+		Global.new_hiscore = true
+		
+		# save game
+		var save_game = FileAccess.open("user://.save", FileAccess.WRITE)
+		
+		for i in Global.hiscores:
+			save_game.store_line(str(i))
+		
+		save_game.close()
+	
 	get_tree().change_scene_to_file("res://GameOver.tscn")
 
 
 func increment_score():
 	Global.score += 1
+	update_score_label()
+
+
+func update_score_label():
+	$ScoreLabel.text = str(Global.score)
