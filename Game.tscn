@@ -2,10 +2,20 @@
 
 [ext_resource type="Script" path="res://game.gd" id="1_qrgsl"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_qrgsl")
 
 [node name="SpawnZombieTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
 [connection signal="timeout" from="SpawnZombieTimer" to="." method="spawn_zombie"]
+[connection signal="timeout" from="ScoreTimer" to="." method="increment_score"]

@@ -1,4 +1,4 @@
-class_name Game extends Node
+class_name Game extends Node2D
 
 
 const character_radius: float = 16
@@ -8,27 +8,50 @@ const max_zombies: int = 30
 var player: Character
 var zombies: Array[Character]
 
-var counter = 0
-
 
 func _ready() -> void:
-	RenderingServer.set_default_clear_color(Color.BLACK)
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	
+	$SpawnZombieTimer.wait_time = Global.spawn_times[Global.difficulty]
 	
 	player = Character.new(Vector2(), character_radius, Color.WHITE)
 	
+	player.z_index = 1
+	
 	player.update = func(delta: float):
-		player.position = get_window().get_mouse_position()
+		player.position = get_viewport().get_mouse_position()
 		player.position = player.position.clamp(
 			Vector2(player.radius, player.radius),
 			Vector2(get_window().size) - Vector2(player.radius, player.radius)
 		)
 	
+	player.update.call(0)
+	
 	add_child(player)
 
 
+func _process(delta: float) -> void:
+	queue_redraw()
+
+
+func _draw() -> void:
+	draw_string(
+		Global.font,
+		Vector2(
+			get_window().size.x/2,
+			Global.font.get_string_size(
+				str(Global.score)
+			).y + 2
+		),
+		str(Global.score),
+		HORIZONTAL_ALIGNMENT_CENTER,
+		-1,
+		32,
+		Color.WHITE
+	)
+
+
 func spawn_zombie() -> void:
-	counter += 1
-	
 	var randy = randi_range(0, 3)
 	
 	var spawn_location = Vector2()
@@ -47,9 +70,6 @@ func spawn_zombie() -> void:
 	elif randy == 1 or randy == 3:
 		spawn_location.y = randi_range(0, get_window().size.y + character_radius)
 	
-	spawn_location.x = 100
-	spawn_location.y = 100
-	
 	var zombie = Character.new(
 		spawn_location,
 		character_radius,
@@ -57,13 +77,13 @@ func spawn_zombie() -> void:
 	)
 	
 	zombie.update = func(delta: float):
-		if counter == 1: print(zombie.position)
-		
 		var dir: Vector2 = zombie.position.direction_to(player.position)
 		
 		zombie.position += dir * delta * 240
 		
-		if zombie.position.distance_to(player.position) < character_radius:
+		var pos = zombie.get("position")
+		
+		if zombie.position.distance_to(player.position) < zombie.radius + player.radius:
 			game_over()
 	
 	zombies.push_back(zombie)
@@ -76,4 +96,8 @@ func spawn_zombie() -> void:
 
 
 func game_over():
-	print("game over")
+	get_tree().change_scene_to_file("res://GameOver.tscn")
+
+
+func increment_score():
+	Global.score += 1
