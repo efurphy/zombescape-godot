@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://booqo47xqark2"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_qrgsl"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_qrgsl"]
 [ext_resource type="FontFile" uid="uid://b0ks74ckmqfyy" path="res://assets/fonts/wizard-small.ttf" id="2_e25lm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_04h4p"]
