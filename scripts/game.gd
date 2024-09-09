@@ -14,7 +14,11 @@ func _ready() -> void:
 	
 	Global.new_hiscore = false
 	
+	$ScoreLabel.add_theme_font_override("font", Global.font)
+	$ScoreLabel.add_theme_font_size_override("font_size", Global.font_size(4))
+	$ScoreLabel.anchors_preset = Control.PRESET_CENTER # idk why this works..
 	$ScoreLabel.position.y = 8
+	$ScoreLabel.z_index = 2
 	update_score_label()
 	
 	$SpawnZombieTimer.wait_time = Global.spawn_times[Global.difficulty]

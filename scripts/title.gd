@@ -1,61 +1,46 @@
-extends Node2D
+extends Node
 
 
-const title_string = "ZombEscape"
 const button_width = 200
 const button_height = 40
 const button_padding = 25
-
-
-var buttons: Array[Button] = [$EasyButton, $MediumButton, $HardButton]
 
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
-	# load save
 	var save_file = FileAccess.open("user://.save", FileAccess.READ)
 	var save_data = save_file.get_as_text().split("\n")
 	for i in range(Global.hiscores.size()):
 		var score = int(save_data[i])
 		Global.hiscores[i] = score
-	#
 	
 	Global.score = 0
 	
-	$EasyButton.size.x = button_width
-	$MediumButton.size.x = button_width
-	$HardButton.size.x = button_width
-	
-	$EasyButton.size.y = button_height
-	$MediumButton.size.y = button_height
-	$HardButton.size.y = button_height
-	
-	$EasyButton.position.x = get_window().size.x / 2 - button_width / 2
-	$MediumButton.position.x = get_window().size.x / 2 - button_width / 2
-	$HardButton.position.x = get_window().size.x / 2 - button_width / 2
-	
-	$EasyButton.position.y = get_window().size.y / 2
-	$MediumButton.position.y = get_window().size.y / 2 + (button_height+button_padding)
-	$HardButton.position.y = get_window().size.y / 2 + (button_height+button_padding)*2
-
-
-func _draw() -> void:
-	draw_string(
-		Global.font,
-		Vector2(
-			get_window().size.x / 2,
-			get_window().size.y / 2.5
-		) - Global.font.get_string_size(
-			title_string, HORIZONTAL_ALIGNMENT_CENTER, -1, 40
-		) / 2,
-		title_string,
-		HORIZONTAL_ALIGNMENT_CENTER,
-		-1,
-		40,
-		Color.LIME
+	$TitleLabel.text = "ZombEscape"
+	$TitleLabel.add_theme_font_override("font", Global.font)
+	$TitleLabel.add_theme_font_size_override("font_size", Global.font_size(6))
+	$TitleLabel.add_theme_color_override("font_color", Color.LIME)
+	$TitleLabel.position = Vector2i(
+		get_window().size.x / 2 - $TitleLabel.size.x / 2,
+		get_window().size.y / 3 - $TitleLabel.size.y / 2
 	)
+	
+	var buttons: Array[Button] = [$EasyButton, $MediumButton, $HardButton]
+	
+	for i in range(buttons.size()):
+		var button = buttons[i]
+		
+		button.add_theme_font_override("font", Global.font)
+		button.add_theme_font_size_override("font_size", Global.font_size(2))
+		
+		button.size.x = button_width
+		button.size.y = button_height
+		
+		button.position.x = get_window().size.x / 2 - button_width / 2
+		button.position.y = get_window().size.y / 2 + \
+			(button_height+button_padding) * i
 
 
 func easy_button_clicked():

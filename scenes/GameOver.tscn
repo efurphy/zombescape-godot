@@ -2,12 +2,35 @@
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_aquvg"]
 
-[node name="GameOver" type="Node2D"]
+[node name="GameOver" type="Node"]
 script = ExtResource("1_aquvg")
 
 [node name="ScreenShakeTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 autostart = true
+
+[node name="GameOverLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="YouSurvivedLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HiscoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NewHiscoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ClickAnywhereLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [connection signal="timeout" from="ScreenShakeTimer" to="." method="stop_shaking"]

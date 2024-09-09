@@ -1,11 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://booqo47xqark2"]
+[gd_scene load_steps=2 format=3 uid="uid://booqo47xqark2"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_2rhyy"]
-[ext_resource type="FontFile" uid="uid://b0ks74ckmqfyy" path="res://assets/fonts/wizard-small.ttf" id="2_p2tba"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_04h4p"]
-font = ExtResource("2_p2tba")
-font_size = 32
 
 [node name="Game" type="Node"]
 script = ExtResource("1_2rhyy")
@@ -18,16 +13,8 @@ autostart = true
 autostart = true
 
 [node name="ScoreLabel" type="Label" parent="."]
-z_index = 2
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
+offset_right = 1.0
 offset_bottom = 23.0
-grow_horizontal = 2
-label_settings = SubResource("LabelSettings_04h4p")
-horizontal_alignment = 1
 
 [node name="DebugLabel" type="Label" parent="."]
 offset_right = 40.0

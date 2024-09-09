@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_qyei7"]
 [ext_resource type="PackedScene" uid="uid://kqc35s1buuft" path="res://scenes/Button.tscn" id="2_shnn7"]
 
-[node name="Title" type="Node2D"]
+[node name="Title" type="Node"]
 script = ExtResource("1_qyei7")
 
 [node name="EasyButton" parent="." instance=ExtResource("2_shnn7")]
@@ -15,9 +15,13 @@ text = "Medium"
 [node name="HardButton" parent="." instance=ExtResource("2_shnn7")]
 text = "Hard"
 
-[connection signal="pressed" from="EasyButton" to="." method="button_clicked"]
+[node name="TitleLabel" type="Label" parent="."]
+offset_right = 98.0
+offset_bottom = 23.0
+
 [connection signal="pressed" from="EasyButton" to="." method="easy_button_clicked"]
-[connection signal="pressed" from="MediumButton" to="." method="button_clicked"]
+[connection signal="pressed" from="EasyButton" to="." method="button_clicked"]
 [connection signal="pressed" from="MediumButton" to="." method="medium_button_clicked"]
-[connection signal="pressed" from="HardButton" to="." method="button_clicked"]
+[connection signal="pressed" from="MediumButton" to="." method="button_clicked"]
 [connection signal="pressed" from="HardButton" to="." method="hard_button_clicked"]
+[connection signal="pressed" from="HardButton" to="." method="button_clicked"]
