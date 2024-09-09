@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl158wgfaxss7"]
 
-[ext_resource type="Script" path="res://scripts/title.gd" id="1_3pfpp"]
-[ext_resource type="PackedScene" uid="uid://kqc35s1buuft" path="res://scenes/Button.tscn" id="2_c8v5b"]
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_qyei7"]
+[ext_resource type="PackedScene" uid="uid://kqc35s1buuft" path="res://scenes/Button.tscn" id="2_shnn7"]
 
 [node name="Title" type="Node2D"]
-script = ExtResource("1_3pfpp")
+script = ExtResource("1_qyei7")
 
-[node name="EasyButton" parent="." instance=ExtResource("2_c8v5b")]
+[node name="EasyButton" parent="." instance=ExtResource("2_shnn7")]
 text = "Easy"
 
-[node name="MediumButton" parent="." instance=ExtResource("2_c8v5b")]
+[node name="MediumButton" parent="." instance=ExtResource("2_shnn7")]
 text = "Medium"
 
-[node name="HardButton" parent="." instance=ExtResource("2_c8v5b")]
+[node name="HardButton" parent="." instance=ExtResource("2_shnn7")]
 text = "Hard"
 
 [connection signal="pressed" from="EasyButton" to="." method="button_clicked"]

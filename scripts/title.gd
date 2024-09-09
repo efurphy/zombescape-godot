@@ -71,4 +71,4 @@ func hard_button_clicked():
 
 
 func button_clicked():
-	get_tree().change_scene_to_file("res://Game.tscn")
+	get_tree().change_scene_to_file("res://scenes/Game.tscn")

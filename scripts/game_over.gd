@@ -21,13 +21,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("click"):
-		get_tree().change_scene_to_file("res://Title.tscn")
+		get_tree().change_scene_to_file("res://scenes/Title.tscn")
 	
 	if shaking:
 		position.x = randi_range(-shake_intensity, shake_intensity)
 		position.y = randi_range(-shake_intensity, shake_intensity)
-	else:
-		position = Vector2.ZERO
 
 
 func _draw() -> void:
@@ -109,4 +107,5 @@ func _draw() -> void:
 
 
 func stop_shaking():
+	position = Vector2.ZERO
 	shaking = false

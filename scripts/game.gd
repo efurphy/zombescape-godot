@@ -93,7 +93,7 @@ func game_over():
 		
 		save_game.close()
 	
-	get_tree().change_scene_to_file("res://GameOver.tscn")
+	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
 
 
 func increment_score():

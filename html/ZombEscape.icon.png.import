@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv06iqkryihmd"
-path="res://.godot/imported/ZombEscape.icon.png-b3c77521bd3cc5758681fed09786b24b.ctex"
+path="res://.godot/imported/ZombEscape.icon.png-b611e4e21352df4d654ecc02330d5437.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://export/html/ZombEscape.icon.png"
-dest_files=["res://.godot/imported/ZombEscape.icon.png-b3c77521bd3cc5758681fed09786b24b.ctex"]
+source_file="res://html/ZombEscape.icon.png"
+dest_files=["res://.godot/imported/ZombEscape.icon.png-b611e4e21352df4d654ecc02330d5437.ctex"]
 
 [params]
 
